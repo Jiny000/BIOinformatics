@@ -1,4 +1,3 @@
-[TOC]
 # 1.Welcome to my repository!
 >"THis is Li Jingyao's repository.Maybe it is clean now.But I think it will be enriched sooner or later.
 # 2.What can you get here?
