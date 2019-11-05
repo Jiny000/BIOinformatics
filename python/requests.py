@@ -53,6 +53,6 @@ with open('F:/ljy/atom/marker2.txt', encoding='utf-8') as m:
                     print(f"{key} is lost with five times of search.")
                     lost.write(f"{key}")
 
-
+lost.close()
 
 print('OK!')
