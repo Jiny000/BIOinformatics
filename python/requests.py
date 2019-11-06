@@ -1,3 +1,5 @@
+##read the markers from file and search in Graingenes.Each one seek for five times.
+#If one makrer hasn't been found even by five times,it will be recorded in the file.
 import re
 import requests
 def get_marker(url, key, headers):
@@ -16,7 +18,7 @@ lost=open("f:/ljy/atom/lost.txt",'w',encoding='utf-8')
 with open('F:/ljy/atom/markerf.txt', encoding='utf-8') as m:
     marker_line = m.read().splitlines()
     compiles = re.compile("5'.+?3'")
-    with open('F:/ljy/atom/primer.txt', 'w', encoding='utf-8') as f:
+    with open('F:/ljy/atom/primer1.txt', 'w', encoding='utf-8') as f:
         for i in marker_line:
             key = i
             headers = {'user-agent': "Chrome"}
@@ -32,11 +34,12 @@ with open('F:/ljy/atom/markerf.txt', encoding='utf-8') as m:
                 if count ==5:
                     print(f"{key} is lost with three times of search.")
                     lost.write(f"{key}")
+                    lost.write("\n")
 
 with open('F:/ljy/atom/marker2.txt', encoding='utf-8') as m:
     marker_line = m.read().splitlines()
     compiles = re.compile("5'.+?3'")
-    with open('F:/ljy/atom/primer.txt', 'w', encoding='utf-8') as f:
+    with open('F:/ljy/atom/primer2.txt', 'w', encoding='utf-8') as f:
         for i in marker_line:
             key = i
             headers = {'user-agent': "Chrome"}
@@ -52,6 +55,7 @@ with open('F:/ljy/atom/marker2.txt', encoding='utf-8') as m:
                 if count ==5:
                     print(f"{key} is lost with five times of search.")
                     lost.write(f"{key}")
+                    lost.write("\n")
 
 lost.close()
 
