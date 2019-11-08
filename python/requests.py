@@ -2,22 +2,26 @@
 #If one makrer hasn't been found even by five times,it will be recorded in the file.
 import re
 import requests
-def get_marker(url, key, headers):
-    r = requests.get(url, headers=headers, timeout=20)
-    print(r.status_code)
-    # if  r.status_code == 200：
+def graingenes(url):
+    r = requests.get(url, timeout=20)
     t = r.text
-    primer = re.findall(compiles, t)
-    print(f'{key}', primer)
-    f.write(f'{key}')
-    f.write(f'{primer}')
-    f.write('\n')
+    seq_compiles = re.compile("PCR primers.+?\n")
+    primer_list = re.findall(seq_compiles,t)
+    if primer_list:
+        for i in primer_list:
+            primer = re.sub('<.+?>','',i)
+            return primer
+
+
+
+
+
 
 lost=open("f:/ljy/atom/lost.txt",'w',encoding='utf-8')
 
 with open('F:/ljy/atom/markerf.txt', encoding='utf-8') as m:
     marker_line = m.read().splitlines()
-    compiles = re.compile("5'.+?3'")
+
     with open('F:/ljy/atom/primer1.txt', 'w', encoding='utf-8') as f:
         for i in marker_line:
             key = i
@@ -27,14 +31,14 @@ with open('F:/ljy/atom/markerf.txt', encoding='utf-8') as m:
             while count < 5:
                 try:
 
-                    get_marker(url, key, headers)
+                    f.write(f'{key}:',get_marker(url))
                     count=6
                 except:
                     count = count + 1
-                if count ==5:
-                    print(f"{key} is lost with three times of search.")
-                    lost.write(f"{key}")
-                    lost.write("\n")
+            if count ==5:
+                print(f"{key} is lost with three times of search.")
+                lost.write(f"{key}")
+                lost.write("\n")
 
 with open('F:/ljy/atom/marker2.txt', encoding='utf-8') as m:
     marker_line = m.read().splitlines()
@@ -48,14 +52,14 @@ with open('F:/ljy/atom/marker2.txt', encoding='utf-8') as m:
             while count < 5:
                 try:
 
-                    get_marker(url, key, headers)
+                    f.write(f'{key}:',get_marker(url))
                     count=6
                 except:
                     count = count + 1
-                if count ==5:
-                    print(f"{key} is lost with five times of search.")
-                    lost.write(f"{key}")
-                    lost.write("\n")
+            if count ==5:
+                print(f"{key} is lost with five times of search.")
+                lost.write(f"{key}")
+                lost.write("\n")
 
 lost.close()
 
