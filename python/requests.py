@@ -2,7 +2,7 @@
 #If one makrer hasn't been found even by five times,it will be recorded in the file.
 import re
 import requests
-def graingenes(url):
+def get_marker(url):
     r = requests.get(url, timeout=20)
     t = r.text
     seq_compiles = re.compile("PCR primers.+?\n")
